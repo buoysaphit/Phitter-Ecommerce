@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - Phitter</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/assets/img/logo.png" type="image/x-icon" />
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AazcJ98mwl68EQcrQXD7OsUo6Oe-EvNsSrAudOg3qBBsyVb4KLZtJkCjPrurA-rcoSpR9eOmScb0X72Z&currency=USD"></script>
+  </head>
+  <body>
+    <!--===== HEADER =====-->
+    <header class="header" id="header">
+      <nav class="nav grid">
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="bx bxs-grid"></i>
+        </div>
+
+        <a href="/index.html" class="nav__logo">Phitter</a>
+
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="index.html" class="nav__link active">Home</a>
+            </li>
+            <li class="nav__item">
+              <a href="index.html" class="nav__link">Featured</a>
+            </li>
+            <li class="nav__item">
+              <a href="index.html" class="nav__link">Women</a>
+            </li>
+            <li class="nav__item">
+              <a href="index.html" class="nav__link">New</a>
+            </li>
+            <li class="nav__item">
+              <a href="./shop.html" class="nav__link">Shop</a>
+            </li>
+          </ul>
+        </div>
+        <div class="nav__shop">
+          <a class="bx bx-shopping-bag" href="/checkout.html"></a>
+          <span class="nav__cart-count" id="cartCount">0</span>
+        </div>
+      </nav>
+    </header>
+
+    <!--===== CHECKOUT =====-->
+    <main class="main">
+      <section class="checkout section" id="checkout">
+        <h2 class="section-title">Checkout</h2>
+        <div class="checkout__container grid">
+          <!-- Cart Items -->
+          <div class="checkout__items" id="checkoutItems">
+            <!-- Cart items will be dynamically inserted here -->
+          </div>
+
+          <!-- Order Summary -->
+          <div class="checkout__summary">
+            <h3 class="checkout__summary-title">Order Summary</h3>
+            <div class="checkout__total" id="checkoutTotal">
+              <!-- Total price will be dynamically inserted here -->
+            </div>
+            <button class="button" id="clearCartButton">Clear Cart</button>
+          </div>
+
+          <!-- PayPal Button -->
+          <div id="paypal-button-container"></div>
+        </div>
+      </section>
+    </main>
+
+    <!--===== FOOTER =====-->
+    <footer class="footer section">
+      <div class="footer__container grid">
+        <div class="footer__box">
+          <h3 class="footer__title">Phitter</h3>
+          <p class="footer__description">New collection of shoes 2025.</p>
+        </div>
+        <div class="footer__box">
+          <h3 class="footer__title">EXPLORE</h3>
+          <ul>
+            <li><a href="index.html" class="footer__link">Home</a></li>
+            <li><a href="shop.html" class="footer__link">Shop</a></li>
+            <li><a href="checkout.html" class="footer__link">Checkout</a></li>
+          </ul>
+        </div>
+        <div class="footer__box">
+          <h3 class="footer__title">SUPPORT</h3>
+          <ul>
+            <li><a href="#" class="footer__link">Product Help</a></li>
+            <li><a href="#" class="footer__link">Customer Care</a></li>
+            <li><a href="#" class="footer__link">Authorized Service</a></li>
+          </ul>
+        </div>
+         <div class="footer__box">
+          <a
+            href="https://www.facebook.com/Buoysophit?mibextid=wwXIfr&mibextid=wwXIfr"
+            class="footer__social"
+            ><i class="bx bxl-facebook"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/_phitter/profilecard/?igsh=eXIyMHVnMDFvOGlo"
+            class="footer__social"
+            ><i class="bx bxl-instagram"></i
+          ></a>
+          <a href="" class="footer__social"><i class="bx bxl-google"></i></a>
+        </div>
+      </div>
+      <p class="footer__copy">
+        &#169; 2025 by Buoysaphit A1-RUPP. All right reserved
+      </p>
+    </footer>
+
+    <!--===== CHECKOUT SCRIPT =====-->
+    <script>
+      // Function to display cart items
+      function displayCartItems() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const checkoutItems = document.getElementById("checkoutItems");
+        checkoutItems.innerHTML = "";
+
+        if (cart.length === 0) {
+          checkoutItems.innerHTML = "<p>Your cart is empty.</p>";
+          document.getElementById("checkoutTotal").innerHTML =
+            "<strong>Total: $0.00</strong>";
+          return;
+        }
+
+        let total = 0;
+        cart.forEach((item, index) => {
+          const price = parseFloat(item.price.replace("$", "")); // Convert price to a number
+          total += price * item.quantity;
+
+          const cartItem = document.createElement("div");
+          cartItem.classList.add("checkout__item");
+          cartItem.innerHTML = `
+          <img src="${item.image}" alt="${item.title}" class="checkout__img">
+          <div class="checkout__item-details">
+            <span class="checkout__name">${item.title}</span>
+            <span class="checkout__price">${item.price}</span>
+            <span class="checkout__quantity">Quantity: ${item.quantity}</span>
+          </div>
+          <button class="button button-light remove-button" data-index="${index}">Remove</button>
+        `;
+          checkoutItems.appendChild(cartItem);
+        });
+
+        // Display the total price
+        document.getElementById(
+          "checkoutTotal"
+        ).innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
+
+        // Add event listeners to all "Remove" buttons
+        document.querySelectorAll(".remove-button").forEach((button) => {
+          button.addEventListener("click", () =>
+            removeFromCart(button.dataset.index)
+          );
+        });
+
+        // Render PayPal button
+        renderPayPalButton(total);
+      }
+
+      // Function to remove a product from the cart
+      function removeFromCart(index) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.splice(index, 1); // Remove the item at the specified index
+        localStorage.setItem("cart", JSON.stringify(cart));
+        displayCartItems(); // Refresh the cart display
+      }
+
+      // Function to clear the cart
+      document
+        .getElementById("clearCartButton")
+        .addEventListener("click", () => {
+          localStorage.removeItem("cart");
+          displayCartItems();
+        });
+
+      // Function to render PayPal button
+      function renderPayPalButton(total) {
+        paypal
+          .Buttons({
+            createOrder: function (data, actions) {
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    amount: {
+                      value: total.toFixed(2), // Total amount
+                      currency_code: "USD",
+                    },
+                  },
+                ],
+              });
+            },
+            onApprove: function (data, actions) {
+              return actions.order.capture().then(function (details) {
+                alert(
+                  "Payment successful! Thank you, " +
+                    details.payer.name.given_name +
+                    "."
+                );
+                localStorage.removeItem("cart"); // Clear the cart after payment
+                window.location.href = "index.html"; // Redirect to the home page
+              });
+            },
+            onError: function (err) {
+              console.error("PayPal error:", err);
+              alert("Payment failed. Please try again.");
+            },
+          })
+          .render("#paypal-button-container");
+      }
+
+      // Display cart items when the page loads
+      displayCartItems();
+
+      // Function to update the cart count
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartCount = cart.reduce(
+          (total, item) => total + item.quantity,
+          0
+        );
+        document.getElementById("cartCount").textContent = cartCount;
+      }
+
+      // Update the cart count when the page loads
+      updateCartCount();
+    </script>
+     <script src="assets/js/main.js"></script>
+  </body>
+</html>

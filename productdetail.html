@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/assets/img/logo.png" type="image/x-icon" />
+
+    <title>Product Detail - Phitter</title>
+  </head>
+  <body>
+    <header class="header" id="header">
+      <nav class="nav grid">
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="bx bxs-grid"></i>
+        </div>
+
+        <a href="/index.html" class="nav__logo">Phitter</a>
+
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="index.html" class="nav__link active">Home</a>
+            </li>
+            <li class="nav__item">
+              <a href="index.html" class="nav__link">Featured</a>
+            </li>
+            <li class="nav__item">
+              <a href="index.html" class="nav__link">Women</a>
+            </li>
+            <li class="nav__item">
+              <a href="index.html" class="nav__link">New</a>
+            </li>
+            <li class="nav__item">
+              <a href="./shop.html" class="nav__link">Shop</a>
+            </li>
+          </ul>
+        </div>
+        <div class="nav__shop">
+          <a class="bx bx-shopping-bag" href="/checkout.html"></a>
+          <span class="nav__cart-count" id="cartCount">0</span>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="product-detail section">
+        <div class="product-detail__container grid">
+          <div class="product-detail__image">
+            <img
+              id="productImage"
+              src=""
+              alt="Product Image"
+              class="product-detail__img"
+            />
+          </div>
+          <div class="product-detail__data">
+            <h1 id="productTitle" class="product-detail__title"></h1>
+            <p id="productPrice" class="product-detail__price"></p>
+            <p id="productDescription" class="product-detail__description"></p>
+            <div class="product-detail__quantity">
+              <label for="quantity">Quantity:</label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                value="1"
+                min="1"
+              />
+            </div>
+            <a href="#" class="button product-detail__button"
+              >Add to Cart <i class="bx bx-right-arrow-alt button-icon"></i
+            ></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+   <footer class="footer section">
+      <div class="footer__container grid">
+        <div class="footer__box">
+          <h3 class="footer__title">Phitter</h3>
+          <p class="footer__description">New collection of shoes 2025.</p>
+        </div>
+        <div class="footer__box">
+          <h3 class="footer__title">EXPLORE</h3>
+          <ul>
+            <li><a href="index.html" class="footer__link">Home</a></li>
+            <li><a href="shop.html" class="footer__link">Shop</a></li>
+            <li><a href="checkout.html" class="footer__link">Checkout</a></li>
+          </ul>
+        </div>
+        <div class="footer__box">
+          <h3 class="footer__title">SUPPORT</h3>
+          <ul>
+            <li><a href="#" class="footer__link">Product Help</a></li>
+            <li><a href="#" class="footer__link">Customer Care</a></li>
+            <li><a href="#" class="footer__link">Authorized Service</a></li>
+          </ul>
+        </div>
+       <div class="footer__box">
+          <a
+            href="https://www.facebook.com/Buoysophit?mibextid=wwXIfr&mibextid=wwXIfr"
+            class="footer__social"
+            ><i class="bx bxl-facebook"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/_phitter/profilecard/?igsh=eXIyMHVnMDFvOGlo"
+            class="footer__social"
+            ><i class="bx bxl-instagram"></i
+          ></a>
+          <a href="" class="footer__social"><i class="bx bxl-google"></i></a>
+        </div>
+        </div>
+      </div>
+      <p class="footer__copy">
+        &#169; 2025 by Buoysaphit A1-RUPP. All right reserved
+      </p>
+    </footer>
+
+    <script>
+      // Function to get query parameter by name
+      function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      // Product data (can be fetched from an API or database)
+      const products = [
+        {
+          id: 1,
+          image: "assets/img/featured1.png",
+          title: "Nike Jordan",
+          price: "$149.99",
+          description:
+            "The Nike Jordan is a classic sneaker that combines style and comfort. Perfect for casual wear or sports, this shoe features a durable design and iconic branding.",
+        },
+        {
+          id: 2,
+          image: "assets/img/featured2.png",
+          title: "Nike Free RN",
+          price: "$149.99",
+          description:
+            "The Nike Free RN offers lightweight flexibility and natural movement. Ideal for running or everyday wear, it provides a comfortable fit and breathable design.",
+        },
+        {
+          id: 3,
+          image: "assets/img/featured3.png",
+          title: "Nike Free RN",
+          price: "$149.99",
+          description:
+            "The Nike Free RN offers lightweight flexibility and natural movement. Ideal for running or everyday wear, it provides a comfortable fit and breathable design.",
+        },
+        //women
+        {
+          id: 4,
+          image: "assets/img/women1.png",
+          title: "Nike Free TR",
+          price: "$129.90",
+          description:
+            "The Nike Free RN offers lightweight flexibility and natural movement. Ideal for running or everyday wear, it provides a comfortable fit and breathable design.",
+        },
+        {
+          id: 5,
+          image: "assets/img/women2.png",
+          title: "Nike Flyknit",
+          price: "$129.90",
+          description:
+            "The Nike Free RN offers lightweight flexibility and natural movement. Ideal for running or everyday wear, it provides a comfortable fit and breathable design.",
+        },
+        {
+          id: 6,
+          image: "assets/img/women3.png",
+          title: "Nike GS Pink",
+          price: "$129.90",
+          description:
+            "The Nike Free RN offers lightweight flexibility and natural movement. Ideal for running or everyday wear, it provides a comfortable fit and breathable design.",
+        },
+        {
+          id: 7,
+          image: "assets/img/women4.png",
+          title: "Nike Get 5",
+          price: "$129.90",
+          description:
+            "The Nike Free RN offers lightweight flexibility and natural movement. Ideal for running or everyday wear, it provides a comfortable fit and breathable design.",
+        },
+        //collection
+        {
+          id: 8,
+          image: "assets/img/new1.png",
+          title: "Mens Shoes",
+          price: "From $90",
+          description:
+            "The Nike Free RN offers lightweight flexibility and natural movement. Ideal for running or everyday wear, it provides a comfortable fit and breathable design.",
+        },
+        {
+          id: 9,
+          image: "assets/img/new2.png",
+          title: "Mens Shoes",
+          price: "$299",
+          description:
+            "The Nike Free RN offers lightweight flexibility and natural movement. Ideal for running or everyday wear, it provides a comfortable fit and breathable design.",
+        },
+        {
+          id: 10,
+          image: "assets/img/new3.png",
+          title: "Mens Shoes",
+          price: "$299",
+          description:
+            "The Nike Free RN offers lightweight flexibility and natural movement. Ideal for running or everyday wear, it provides a comfortable fit and breathable design.",
+        },
+        {
+          id: 11,
+          image: "assets/img/new4.png",
+          title: "Mens Shoes",
+          price: "$299",
+          description:
+            "The Nike Free RN offers lightweight flexibility and natural movement. Ideal for running or everyday wear, it provides a comfortable fit and breathable design.",
+        },
+        {
+          id: 12,
+          image: "assets/img/new5.png",
+          title: "Mens Shoes",
+          price: "$299",
+          description:
+            "The Nike Free RN offers lightweight flexibility and natural movement. Ideal for running or everyday wear, it provides a comfortable fit and breathable design.",
+        },
+        //shop
+      ];
+
+      // Function to add product to cart
+      function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const productInCart = cart.find((item) => item.id === product.id);
+
+        if (productInCart) {
+          productInCart.quantity += quantity;
+        } else {
+          product.quantity = quantity;
+          cart.push(product);
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount(); // Update the cart count
+        window.location.href = "shop.html";
+      }
+      // Function to update the cart count
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartCount = cart.reduce(
+          (total, item) => total + item.quantity,
+          0
+        );
+        document.getElementById("cartCount").textContent = cartCount;
+      }
+      // Load product details based on the productId
+      const productId = getQueryParam("productId");
+      const product = products.find((p) => p.id == productId);
+
+      if (product) {
+        document.getElementById("productImage").src = product.image;
+        document.getElementById("productTitle").textContent = product.title;
+        document.getElementById("productPrice").textContent = product.price;
+        document.getElementById("productDescription").textContent =
+          product.description;
+
+        // Add event listener to the "Add to Cart" button
+        document
+          .querySelector(".product-detail__button")
+          .addEventListener("click", () => addToCart(product));
+      } else {
+        document.getElementById("productTitle").textContent =
+          "Product Not Found";
+      }
+      // Update the cart count when the page loads
+      updateCartCount();
+      
+
+      
+    </script>
+      <script src="assets/js/main.js"></script>
+  </body>
+</html>
